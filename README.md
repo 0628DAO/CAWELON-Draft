@@ -1,82 +1,70 @@
-README.md
+# CAWELON — Provisional Draft
 
+**Status:** Draft / Not Audited / Not Deployed  
+**Intended Network:** Ethereum Mainnet  
+**Maintainer:** 0628DAO
 
-CAWELON — Provisional Draft
-Status: Draft / Not audited / Not deployed
-Intended network: Ethereum Mainnet
-Maintainer: 0628DAO
+This repository contains the provisional public materials for the CAWELON relaunch, including an ERC-20 smart contract draft and a separated dApp architecture. CAWELON is being designed as the foundational token for the 0628DEX Liquidity Layer and asset-exchange infrastructure within the 0628DAO ecosystem.
 
-CAWELONの再始動に向けた、ERC-20スマートコントラクトとdApp構成の暫定公開資料です。CAWELONは、0628DAOエコシステムにおける 0628DEX（Liquidity Layer／資産交換） の基盤トークンとして設計を進めています。
+The repository is public to make the pre-deployment design and validation process transparent. No official CAWELON contract has been deployed from this repository. All code currently published here is an unaudited draft.
 
-このリポジトリは、デプロイ前の設計・検証過程を透明化するために公開しています。現在掲載しているコードは監査前のドラフトであり、稼働中のトークンや販売中の商品を示すものではありません。
+## Current Provisional Specifications
 
-現在の暫定仕様
-項目	内容
-Token Name	CAWELON（予定）
-Symbol	未確定（コンストラクタ引数）
-規格	Ethereum ERC-20
-初期発行量	420,000,000,000,000 tokens
-Decimals	18
-Transfer / Buy / Sell TAX	0%
-Rewards / Reflection	なし
-追加Mint	なし
-Burn	保有者本人による自己Burnのみ
-Permit	EIP-2612対応
-Owner / Admin / Pause / Upgrade / Proxy	なし
-Token NameはCAWELONを維持する方針です。Symbolと初期受取ウォレットはCAWから機械的に流用せず、デプロイ前に正式決定します。現在のコードでは最終確認に対応できるよう、Token NameとSymbolをコンストラクタ引数にしています。
+| Item | Specification |
+|---|---|
+| Token Name | CAWELON (intended) |
+| Symbol | Not finalized; constructor parameter |
+| Network | Ethereum Mainnet |
+| Standard | ERC-20 |
+| Initial Supply | 420,000,000,000,000 tokens |
+| Decimals | 18 |
+| Transfer / Buy / Sell Tax | 0% |
+| Rewards / Reflection | None |
+| Additional Minting | None |
+| Burn | Self-burn by the token holder only |
+| Permit | EIP-2612 |
+| Owner / Admin / Pause / Upgrade / Proxy | None |
 
-0628DAOにおける位置付け
-0628DAOはトークン名ではなく、複数の専門知性と人間の最終責任を組み合わせるガバナンス構想です。CAWELONはその統治対象の一つであり、0628DAOそのものではありません。
+The CAWELON name is intended to remain. The token symbol and initial recipient will be formally determined before deployment and will not be copied mechanically from CAW. The current contract therefore accepts the token name, symbol, and initial recipient as constructor parameters.
 
-本リポジトリに含まれるのはCAWELONの基礎トークンとdApp接続方針です。0628DEX本体、流動性管理、フロントエンドおよびガバナンス執行機構は、別コントラクト・別工程として設計、検証、公開します。
+## Position within 0628DAO
 
-設計方針
-トークン本体は標準的で小さなERC-20実装に保つ
+0628DAO is not a token name. It is a governance concept that combines multiple specialized intelligences with final human responsibility. CAWELON is one of the systems governed under that concept; CAWELON is not 0628DAO itself.
 
-dApp固有の機能は別のプロトコルコントラクトへ分離する
+This repository contains only the CAWELON base-token draft and its dApp integration principles. The 0628DEX application, liquidity management, frontend, and governance execution mechanisms will be designed, tested, and published as separate contracts and development stages.
 
-dAppからは IERC20 / IERC20Permit として接続する
+## Design Principles
 
-トークン移動にはOpenZeppelin SafeERC20 の利用を前提とする
+- Keep the base token implementation small and standards-based
+- Place dApp-specific functions in separate protocol contracts
+- Connect through `IERC20` and `IERC20Permit`
+- Use OpenZeppelin `SafeERC20` for token transfers
+- Do not embed taxes, reflection, automatic distribution, or DEX-pair detection in the base token
+- Do not provide any post-deployment minting path
 
-TAX、Reflection、自動分配、DEXペア判定をトークン本体へ埋め込まない
+This separation allows future dApps to be added without reissuing the base token and allows security review, operational controls, and update policies to be designed independently for each protocol component.
 
-後発Mint経路を設けない
+## Repository Contents
 
-この分離により、将来dAppを追加してもトークン本体を再発行せず、機能単位で検証・監査・更新方針を設計できます。
+- `CAWELON_Draft.sol` — Provisional ERC-20 smart contract
+- `CAWELONDraft.txt` — dApp integration principles and pre-deployment considerations
 
-リポジトリの内容
-CAWELON_Draft.sol — 暫定ERC-20スマートコントラクト
+## Items to Complete Before Deployment
 
-CAWELONDraft.txt — dApp対応方針とデプロイ前の検討事項
+- Confirm the final token name and symbol
+- Confirm the wallet receiving the initial supply
+- Decide whether any fixed restrictions belong in the base token or the dApp layer
+- Determine whether `ERC20Votes` is required
+- Implement automated tests and complete testnet validation
+- Complete an independent security audit
+- Publish the official deployment address
 
-デプロイ前に確定・実施する事項
-正式なToken NameとSymbol
+## Important Notices
 
-初期発行分の受取ウォレット
-
-制限機能を本体またはdApp側のどちらへ置くか
-
-ERC20Votes 採用の要否
-
-テストコードとテストネット検証
-
-第三者によるセキュリティ監査
-
-正式なデプロイアドレスの公開
-
-重要事項
-本コードは監査前・未デプロイです。
-
-現時点で公式コントラクトアドレスはありません。
-
-本リポジトリは、トークンの販売、投資勧誘、利益または価格上昇の保証を目的とするものではありません。
-
-ウォレット接続や送金を行う前に、将来公式に告知されるネットワークとコントラクトアドレスを必ず照合してください。
-
-仕様は検証・監査・法務確認の結果により変更される場合があります。
-
-English summary
-This repository contains a provisional Ethereum ERC-20 contract and a separated dApp architecture for CAWELON, intended as the base token for the 0628DEX Liquidity Layer. The draft uses a fixed initial supply, 18 decimals, 0% transfer/buy/sell tax, no rewards or reflection, no later minting, self-burn only, and EIP-2612 Permit. The CAWELON name is intended to remain; the symbol and initial recipient are not finalized. The code has not been audited or deployed and is not an offer or promise of returns.
+- The code is unaudited and undeployed.
+- No official CAWELON contract address currently exists.
+- This repository is not an offer to sell tokens, an investment solicitation, or a promise of profit or price appreciation.
+- Before connecting a wallet or transferring tokens, verify the network and contract address through future official announcements.
+- Specifications may change following testing, auditing, or legal review.
 
 © 0628DAO. Development record for technical review.
