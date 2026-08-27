@@ -1,59 +1,81 @@
-# CAWELON dApp対応方針（仮）
+CAWELON dApp Architecture Principles (Provisional)
 
-## 基本構造
+Positioning
 
-CAWと同様に、CAWELONのトークン本体とdAppを分離する。
+This document describes the pre-deployment architecture for CAWELON.
+It is a provisional, unaudited, and undeployed design.
+No official CAWELON smart contract has been deployed from this repository.
 
-1. **CAWELONトークン本体**
-   - Ethereum ERC-20
-   - 初期発行420兆枚
-   - TAX 0％
-   - リワード／Reflectionなし
-   - 追加Mintなし
-   - 自己バーンのみ
-   - EIP-2612 Permit対応
-   - Owner・管理者・Pause・Proxyなし
+Core CAWELON Information
 
-2. **dApp用プロトコルコントラクト**
-   - CAWELONを`IERC20`として接続する
-   - トークン移動にはOpenZeppelinの`SafeERC20`を使用する
-   - Permitを利用する場合は`IERC20Permit`で署名承認を受ける
-   - dAppの機能更新や追加は、この層で行う
+- Intended network: Ethereum Mainnet
+- Token name: CAWELON (intended)
+- Symbol: Not finalized; constructor parameter
+- Standard: ERC-20
+- Initial supply: 420,000,000,000,000 tokens
+- Decimals: 18
+- Transfer / buy / sell tax: 0%
+- Rewards / reflection: None
+- Additional minting: None
+- Burn: Self-burn only
+- Permit: EIP-2612
+- Owner / administrator / pause / upgrade / proxy: None
 
-3. **フロントエンド**
-   - ウォレット接続
-   - CAWELON残高表示
-   - Permit署名または通常のApprove
-   - dApp用コントラクトの操作
-   - GitHubでソースを公開し、デプロイ先を明示する
+Base Architecture
 
-## この分離方式の理由
+The CAWELON base token is separated from dApp-specific protocol contracts.
 
-- dAppを追加してもCAWELON本体を再発行する必要がない
-- TAXやReflectionによる残高の予期しない変化がなく、dApp側の計算が安定する
-- トークン本体の攻撃面を小さくできる
-- dAppごとに監査・停止・更新方針を分けられる
-- ウォレット、DEX、ブロックエクスプローラーとの互換性を維持しやすい
+1. CAWELON Base Token
 
-## デプロイ前に決める事項
+- Ethereum Mainnet ERC-20
+- Fixed initial supply
+- 0% transfer / buy / sell tax
+- No rewards or reflection
+- No additional minting
+- Self-burn only
+- EIP-2612 Permit support
+- No owner, administrator, pause, upgrade, or proxy authority
 
-- 正式なトークン名
-- 正式なSymbol
-- 初期発行分の受取ウォレット
-- 固定ブラックリストを本体へ入れるか、dApp側だけで制限するか
-- dAppでオンチェーン投票・委任を使うか
+2. dApp Protocol Contracts
 
-オンチェーン投票や委任をトークン残高に直接結び付ける場合は、デプロイ前に
-`ERC20Votes`の採否を決める。通常の残高参照、決済、ステーキング、会員認証、
-投稿・メッセージ等のdAppであれば、現在の標準ERC-20＋Permit構成で接続できる。
+- Connect to CAWELON through IERC20
+- Use OpenZeppelin SafeERC20 for token transfers
+- Use IERC20Permit for signature-based approvals when Permit is enabled
+- Place dApp-specific functions, restrictions, and update procedures in this layer
+- Keep 0628DEX and liquidity-management logic separate from the base token
 
-## 未採用
+3. Frontend
 
-- トークン本体へのdApp固有ロジックの埋め込み
-- 売買TAX
-- 保有者への自動リワード
+- Support Ethereum Mainnet-compatible wallets
+- Display CAWELON balances
+- Support Permit signatures or standard approvals
+- Interact with the relevant dApp protocol contracts
+- Clearly disclose source code, audit status, and deployment addresses on GitHub
+
+Reasons for Separation
+
+- New dApps can be added without reissuing the CAWELON base token
+- A 0% tax and no-reflection design prevents unexpected balance changes
+- The attack surface of the base token remains small
+- Audit, pause, and upgrade policies can be designed independently for each dApp
+- Standard compatibility with wallets, DEXs, and block explorers is easier to preserve
+
+Items to Confirm Before Deployment
+
+- Final token name and symbol
+- Wallet receiving the initial supply
+- Whether any fixed restrictions belong in the base token or the dApp layer
+- Whether ERC20Votes is required for on-chain voting or delegation
+- Automated testing and testnet validation procedures
+- Independent security audit procedures
+- Official deployment address publication
+
+Not Adopted in the Base Token
+
+- dApp-specific logic embedded in the token contract
+- Transfer, buy, or sell taxes
+- Automatic holder rewards
 - Reflection
-- DEXペア判定
-- マーケティングウォレットへの自動分配
-- 後発Mint
-
+- DEX-pair detection
+- Automatic distribution to a marketing wallet
+- Post-deployment minting
