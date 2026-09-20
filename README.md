@@ -1,10 +1,14 @@
 # CAWELON CORE (CAWELON)
 
+
 **Status: deployed on Base Mainnet; source verified as an exact match on Blockscout. Not independently audited.**
+
 
 CAWELON CORE is a fixed-supply, zero-tax ERC-20 core token developed by AssetDeploy LLC for the 0628DAO ecosystem, future autonomous AI agents, and decentralized transaction infrastructure.
 
+
 ## Mainnet deployment
+
 
 | Item | Value |
 |---|---|
@@ -18,7 +22,23 @@ CAWELON CORE is a fixed-supply, zero-tax ERC-20 core token developed by AssetDep
 | Source verification | Blockscout exact match |
 | Project page | [assetdeploy.xyz/#caweloncore](https://assetdeploy.xyz/#caweloncore) |
 
+
+## Aerodrome liquidity
+
+| Item | Value |
+|---|---|
+| DEX | Aerodrome Finance |
+| Pool type | Volatile (vAMM) |
+| Pair | CAWELON/USDC |
+| Pool | [`0x5445b0F683c74Aff048149bb9e0865d05A85b0b4`](https://base.blockscout.com/address/0x5445b0F683c74Aff048149bb9e0865d05A85b0b4) |
+| Initial liquidity | 4,200,000,000,000 CAWELON + 100 USDC |
+| Add-liquidity transaction | [`0xccb3bd357e3b83f12a891e0ec4583c203ce163899ee00517dea31c5cb0cb0da3`](https://base.blockscout.com/tx/0xccb3bd357e3b83f12a891e0ec4583c203ce163899ee00517dea31c5cb0cb0da3) |
+| USDC | [Canonical Base USDC](https://base.blockscout.com/address/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913) |
+
+This pool is external to the CAWELON token contract. Pool balances and price may change through trading and later liquidity changes.
+
 ## Confirmed token specification
+
 
 | Item | Value |
 |---|---|
@@ -32,29 +52,40 @@ CAWELON CORE is a fixed-supply, zero-tax ERC-20 core token developed by AssetDep
 | Permit | EIP-2612, domain name `CAWELON CORE` |
 | Owner / admin / pause / upgrade / proxy | None |
 
+
 The entire supply was minted once to the initial-holder address. The contract contains no vesting, automatic distribution, price support, liquidity, blacklist, pause, upgrade, or administrator mint mechanism. Any liquidity position is external to the token contract.
+
 
 ## Base Sepolia reference
 
+
 The same implementation was deployed and exact-match verified on Base Sepolia before mainnet release:
+
 
 - Contract: [`0x9c2aeb2f80e074DaC065d0E5dB41c2f01feD280f`](https://base-sepolia.blockscout.com/address/0x9c2aeb2f80e074DaC065d0E5dB41c2f01feD280f?tab=contract)
 - Network: Base Sepolia (chain ID 84532)
 
+
 ## Provenance and scope
+
 
 Base source: [0628DAO/DAT](https://github.com/0628DAO/DAT/tree/0aa811b9c7607d7af6129a943cca8be72974a59b), `contracts/DATCore.sol`. Token logic is unchanged except for the contract/error names, token name, symbol, permit domain, and initial supply. DATCORE's MIT license and pinned OpenZeppelin/compiler dependencies are retained.
 
+
 Prior Draft documentation is archived at [docs/legacy-draft-readme.md](docs/legacy-draft-readme.md). Existing token deployments are not migrated or converted by this contract.
+
 
 ## Local checks
 
+
 Use Node.js 22 or newer:
+
 
 ```sh
 npm ci
 npm run check
 ```
+
 
 The test suite covers metadata, supply, allocation, transfers, allowances, holder burns, authorized and unauthorized `burnFrom`, EIP-2612 permits, replay and expiry rejection, EIP-712 domain data, and the absence of privileged functions.
 
