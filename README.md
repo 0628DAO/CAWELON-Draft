@@ -7,6 +7,29 @@
 CAWELON CORE is a fixed-supply, zero-tax ERC-20 core token developed by AssetDeploy LLC for the 0628DAO ecosystem, future autonomous AI agents, and decentralized transaction infrastructure.
 
 
+## ThreeCore direction — CAWELON
+
+CAWELON is the higher-holder-return identity within ThreeCore. The six-minute
+film illustrates decentralized trading; the separate 120-second wallet special
+introduces one dedicated wallet per agent, backend signing within authorized
+limits, settlement accounting and own-token buyback and burn.
+
+Dedicated-wallet coding is underway. The film's profitable BTC long at ×100 is
+an illustration, not the current runtime configuration or a record of results.
+“High dividends” expresses the narrative goal; this token has no automatic
+dividend mechanism. Trading, buybacks and liquidity operations require separate
+software. x402 is not a prerequisite.
+
+CAWELONはホルダーへの高い還元を重視。専用ウォレットは開発中で、
+各自の実現収益による自トークンのBuyback & Burnを目指します。
+動画の100倍取引は説明用の場面で、現在の運用設定を示すものではありません。
+
+Despite this repository's `-Draft` name, `contracts/CAWELONCore.sol` is the
+current token implementation described below. Root-level draft files are
+historical references.
+
+See [ThreeCore direction, wallet workflow and implementation boundaries](https://github.com/0628DAO/0628DAO-Protocol/blob/main/docs/THREECORE.md).
+
 ## Mainnet deployment
 
 
